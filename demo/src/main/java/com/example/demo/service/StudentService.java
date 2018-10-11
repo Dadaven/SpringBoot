@@ -1,5 +1,7 @@
-package com.example.demo;
+package com.example.demo.service;
 
+import com.example.demo.repository.StudentRepository;
+import com.example.demo.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +12,7 @@ public class StudentService {
 
 
     @Autowired
-    private  StudentRepository studentRepository;
+    private StudentRepository studentRepository;
 
     @Transactional//原子事务，只有查询不需要加事务
     public void inserTow(){

@@ -1,0 +1,6 @@
+server:
+  port: 8081
+  context-path: /demo
+myconfig:
+  name: DDV
+  age: 23

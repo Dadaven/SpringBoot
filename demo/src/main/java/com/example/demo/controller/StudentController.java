@@ -1,5 +1,8 @@
-package com.example.demo;
+package com.example.demo.controller;
 
+import com.example.demo.domain.Student;
+import com.example.demo.repository.StudentRepository;
+import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +18,7 @@ public class StudentController {
     private StudentRepository studentRepository;
 
     @Autowired
-    private  StudentService studentService;
+    private StudentService studentService;
 
     /*
     查询所有学生列表

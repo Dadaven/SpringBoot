@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.domain;
 
 import javax.persistence.Id;
 import javax.persistence.Entity;
@@ -12,7 +12,6 @@ public class Student {
     @GeneratedValue
     private Integer id;
     private String name;
-
     public Student() {
     }
 

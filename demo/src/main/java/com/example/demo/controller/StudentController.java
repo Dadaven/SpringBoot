@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.Result;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.StudentService;
 import com.example.demo.domain.Student;
+import com.example.demo.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,15 +35,15 @@ public class StudentController {
     新增一个学生
      */
     @GetMapping(value = "/add")
-    public Student oneStudent(@Valid Student student, BindingResult bindingResult){
+    public Result<Student> oneStudent(@Valid Student student, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            System.out.println(bindingResult.getFieldError().getDefaultMessage());
-            return null;
+
+            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
          student.setName(student.getName());
          student.setAge(student.getAge());
          student.setHobby(student.getHobby());
-       return studentRepository.save(student);
+        return ResultUtil.success(studentRepository.save(student));
     }
     /*
     通过age方式查询一个学生信息
@@ -85,5 +87,10 @@ public class StudentController {
       @GetMapping(value = "students/inserttwo")
       public void insertTwo(){
          studentService.inserTow();
+      }
+
+      @GetMapping(value = "/getAge/{id}")
+    public void getAge(@PathVariable("id") Integer id) throws Exception{
+             studentService.getAge(id);
       }
 }

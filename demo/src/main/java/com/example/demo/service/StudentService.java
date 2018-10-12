@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.Exception.StudentException;
+import com.example.demo.enums.StudentResultEnum;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +30,23 @@ public class StudentService {
         student1.setHobby("游戏");
         studentRepository.save(student1);
 
+    }
+/*
+验证不通过就跑出异常
+ */
+    public void getAge(Integer id) throws Exception{
+        Student student=studentRepository.findOne(id);
+        Integer age=student.getAge();
+        if(age<10){
+            throw new StudentException(StudentResultEnum.MIN_10);
+        }else if(age>=10&&age<16){
+            throw new StudentException(StudentResultEnum.MIN_16);
+        }
+    }
+/*
+通过id查询一个学生
+ */
+    public Student findOne(Integer id){
+        return studentRepository.findOne(id);
     }
 }

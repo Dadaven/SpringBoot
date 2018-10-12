@@ -4,11 +4,13 @@ import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.StudentService;
 import com.example.demo.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,13 +33,14 @@ public class StudentController {
     新增一个学生
      */
     @GetMapping(value = "/add")
-    public Student oneStudent(@RequestParam("name") String name,
-                              @RequestParam("age") Integer age,
-                              @RequestParam("hobby") String hobby){
-         Student student=new Student();
-         student.setName(name);
-         student.setAge(age);
-         student.setHobby(hobby);
+    public Student oneStudent(@Valid Student student, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            return null;
+        }
+         student.setName(student.getName());
+         student.setAge(student.getAge());
+         student.setHobby(student.getHobby());
        return studentRepository.save(student);
     }
     /*

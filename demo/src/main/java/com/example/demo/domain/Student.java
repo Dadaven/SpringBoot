@@ -3,6 +3,7 @@ package com.example.demo.domain;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.validation.constraints.Min;
 
 @Entity
 public class Student {
@@ -49,6 +50,7 @@ public class Student {
     }
 
 
+    @Min(value = 18,message = "未成年")
     private Integer age;
     private String hobby;
 }
